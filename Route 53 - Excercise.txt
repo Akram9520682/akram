@@ -1,0 +1,44 @@
+prerequisite
+1.Webserver
+2.Public Domain Name
+
+
+Task 1 : Route msetlab.com registed in WordPress, DNS traffic to the wesbite hosted in Amazon Linux through Alias Record
+Solution : Create a Alias record to redirect
+		 Type  Name Value
+		 Alias @    ec2-54-221-89-84.compute-1.amazonaws.com
+Result : Tested and working fine
+-------------------------------------------------------------------------------------------------------------------------
+Task 2 : Route msetlab.com registed in WordPress, DNS traffic to the wesbite hosted in Amazon Linux through A Record
+Solution : Create a Alias record to redirect
+		 Type  Name Value
+		 A     @    54.221.89.84
+Result : Tested and working fine
+-------------------------------------------------------------------------------------------------------------------------
+Task 3 : Use AWS Name Server instead of WordPress : Transfer WordPress Name Server in to AWS Route 53
+Solution : 
+1. Create a hosted zone for msetlab.com then select the type : Public hosted zone
+2. Record the value of NS records 
+	ns-2031.awsdns-61.co.uk
+    ns-1190.awsdns-20.org
+    ns-460.awsdns-57.com
+    ns-934.awsdns-52.net
+3. Add these record in WordPress " Name servers" section
+	Enter your custom name servers
+	ns-2031.awsdns-61.co.uk
+    ns-1190.awsdns-20.org
+    ns-460.awsdns-57.com
+    ns-934.awsdns-52.net
+4. Verify the changes in mxtoolbox by entering the domain name "msetlab.com" and choose "DNS Lookup" and look for "Reported by under "dns check" section
+5. Check your website is accessible
+Result : Tested and working fine
+-------------------------------------------------------------------------------------------------------------------------
+Task 4 :  Transfer A record from WordPress in to (AWS Route 53) 
+Solution :
+1. Add a A record for the webserver. 
+	Record Name   Type  Routing policy  Differentiator  Alias   Value/Route traffic to   TTL (seconds)
+	msetlab.com   A     Simple 		    -				No      54.221.89.84             60
+2. Verify the changes in mxtoolbox
+3. Check your website is accessible
+Result : Tested and working fine
+Important note: Domain Registration is not possible with pluralsight subsription.
